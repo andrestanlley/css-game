@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+}
+#square{
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background: green;
+    overflow: hidden;
+}
+
+#food{
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background: red;
+
+
+}
