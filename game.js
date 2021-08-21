@@ -1,3 +1,4 @@
+/* Geração aleatoria de comida. */
 let food = document.getElementById('food')
 let CordFood = ()=>{
     let CordFoodX = Math.round(Math.random() * (visualViewport.width-100)/10)*10
@@ -6,6 +7,8 @@ let CordFood = ()=>{
     food.style.left = CordFoodX+"px"
 }
 CordFood()
+
+/*Movimentação do personagem*/
 
 let CordX = 0, CordY = 0
 let passo = 10
@@ -24,6 +27,10 @@ document.body.addEventListener("keydown", ()=>{
             break
         case 40: case 83:
             Baixo()
+            break
+        case 27:
+            clearInterval(direction)
+            console.log('PAUSE!')
             break
     }
 })
@@ -66,7 +73,14 @@ const Baixo = () =>{
     }, speed)
 }
 
+/* Verificação de colisão ou transbordamento. */
+
 let verify = ()=>{
+    food.style.top = (Number(food.style.top.replaceAll('px','')))+Math.random() * 50+"px"
+    food.style.top = (Number(food.style.top.replaceAll('px','')))-Math.random() * 50+"px"
+    food.style.left = (Number(food.style.left.replaceAll('px','')))+Math.random() * 50+"px"
+    food.style.left = (Number(food.style.left.replaceAll('px','')))-Math.random() * 50+"px"
+    console.log(food.style.top)
     if (CordX >= visualViewport.width){
             CordX = -100
         } else if (CordY >= visualViewport.height){
