@@ -17,6 +17,8 @@
     width: 100px;
     height: 100px;
     background: red;
+}
 
-
+#score{
+    top: 30px;
 }
