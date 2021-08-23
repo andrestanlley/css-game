@@ -3,6 +3,11 @@ let welcome = document.querySelector('div.welcome')
 let gameover = document.querySelector('div.gameover')
 let pause = document.querySelector('div.pause')
 /* Tamanho da tela */
+onload = ()=> 
+{if (telaX < telaY){
+    console.log('Mobile!')
+    document.body.style.backgroundImage = "url('./img/background_mobile.jpg')"
+}}
 let telaX = visualViewport.width
 let telaY = visualViewport.height
 const atualizar = ()=>{
@@ -17,10 +22,6 @@ const iniciar = ()=>{
     square.style.visibility = "visible"
     food.style.visibility = "visible"
     cc = setInterval(()=>{contagem()},100)
-    if (telaX < telaY){
-        console.log('Mobile!')
-        document.body.style.backgroundImage = "url('./img/background_mobile.jpg')"
-    }
 }
 
 
