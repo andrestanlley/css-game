@@ -9,10 +9,40 @@
     <link rel="shortcut icon" href="/img/candy.png" type="image/x-icon">
 </head>
 <body>
+    <div class="welcome">
+        <div id="tile">
+            <h1>Bem-vindo</h1>
+            <img src="/img/gyarados.gif" alt="">
+            <p>Nesse mini-game você deve tentar conseguir o máximo de PokeCandys possiveis em uma corrida contra o tempo!</p><br>
+            <ul>
+                <li>Você pode pausar a qualquer momento usando ESC.</li>
+                <li>Para se mover, use W,A,S,D ou as setinhas do teclado.</li>
+                <li>Se quiser ainda mais rapidez, segure os botões de movimento.</li>
+                <li>Pegar doces te dará mais tempo, porém você ficará mais rápido.</li>
+                <li>Os doces estão sofrendo instabilidade cosmica, será dificil acertar.</li>
+                <li>Você e os doces ficarão menores ao longo da partida para aumentar a dificuldade!.</li>
+                <li>// Isso tá CHEIO de bugs, ajude reportando! :)</li>
+            </ul>
+            <h3>use espaço para iniciar</h3>
+        </div>
+    </div>
     <div id="square"><img src="/img/me.gif" alt="Magikarp"></div>
     <div id="food"><img src="/img/candy.png" alt="Pokemon Candy"></div>
     <div id="score">
-        <h1 id="time"></h1>
+        <h1 id="time">15s</h1>
+    </div>
+    <div class="gameover">
+        <div id="tile">
+            <h1>Game<br>Over</h1>
+            <img src="/img/gameover.gif" alt="GameOver :(">
+            <button onclick="atualizar()">Continuar</button>
+        </div>
+    </div>
+    <div class="pause">
+        <div id="tile">
+            <h1>PAUSE</h1>
+            <p>movimente o personagem para retornar</p>
+        </div>
     </div>
 </body>
 <script src="game.js"></script>
