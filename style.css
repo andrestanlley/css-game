@@ -3,12 +3,19 @@
     box-sizing: border-box;
     padding: 0;
     border: 0;
+    color: white;
 }
+
+body{
+    background-image: url('https://wallpaperaccess.com/full/1382564.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
 #square{
     position: fixed;
     width: 100px;
     height: 100px;
-    background: green;
     overflow: hidden;
 }
 
@@ -16,9 +23,16 @@
     position: fixed;
     width: 100px;
     height: 100px;
-    background: red;
 }
 
 #score{
     top: 30px;
+}
+
+img{
+    height: 100%;
+}
+
+#food > img{
+    height: 75%;
 }

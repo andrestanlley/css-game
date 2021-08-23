@@ -13,11 +13,10 @@ let CordFood = ()=>{
 
 /*Movimentação do personagem*/
 
-let CordX = 0, CordY = 0
-let passo = 10
+let CordX = Math.round(Math.random() * (visualViewport.width-tamanho)/10)*10, CordY = Math.round(Math.random() * (visualViewport.height-tamanho)/10)*10
+let passo = 5
 let square = document.getElementById('square')
 document.body.addEventListener("keydown", ()=>{
-    contagem()
     switch (event.keyCode){
         case 37: case 65:
             Esquerda()
@@ -34,6 +33,7 @@ document.body.addEventListener("keydown", ()=>{
         case 27:
             clearInterval(direction)
             console.log('PAUSE!')
+            clearInterval(cc)
             break
     }
 })
@@ -42,6 +42,7 @@ document.body.addEventListener("keydown", ()=>{
 let speed = 0
 let direction
 const Esquerda = () =>{
+    square.style.transform = "scaleX(1)"
     clearInterval(direction)
     direction = setInterval(()=>{
         CordX -= passo
@@ -51,6 +52,7 @@ const Esquerda = () =>{
 }
 
 const Cima = () =>{
+    square.style.transform = "rotate(90deg)"
     clearInterval(direction)
     direction = setInterval(()=>{
         CordY -= passo
@@ -60,6 +62,7 @@ const Cima = () =>{
 }
 
 const Direita = () =>{
+    square.style.transform = "scaleX(-1)"
     clearInterval(direction)
     direction = setInterval(()=>{
         CordX += passo
@@ -69,6 +72,7 @@ const Direita = () =>{
 }
 
 const Baixo = () =>{
+    square.style.transform = "rotate(-90deg)"
     clearInterval(direction)
     direction = setInterval(()=>{
         CordY += passo
@@ -90,10 +94,20 @@ let verify = ()=>{
     if (CordX <= -1){Direita()}
     if (CordY >= (visualViewport.height-tamanho)){Cima()}
     if (CordY <= -1){Baixo()}
+    if (tempo <= 10){
+        time.style.color = "red"
+    } else {
+        time.style.color = "white"
+    }
     if (((CordX+tamanho)>Number(food.style.left.replace('px','')) && (CordX)<Number(food.style.left.replace('px',''))+tamanho) && (CordY+tamanho)>Number(food.style.top.replace('px','')) && (CordY)<Number(food.style.top.replace('px',''))+tamanho){
         CordFood()
         tamanho -= 5
         passo += 2
+        tempo += 1.5
+    if (tempo > 0 && tamanho == 20){
+        alert(`VOCÊ GANHOU! :DD`)
+        document.location.reload();
+    }
     }
 
     /* Define tamanho do quadrado e dá comida. */
@@ -106,23 +120,21 @@ let verify = ()=>{
 /* Conta o tempo */
 let time = document.getElementById('time')
 let tempo
+tempo = 15
 const contagem = ()=>{
-    tempo = 30
     cc = setInterval(()=>{
-        tempo --
-        time.innerText = tempo+"s"
+        tempo -= 0.1
+        time.innerText = tempo.toFixed(1)+"s"
         if (tempo <= 0){
             alert('GAME OVER')
-            iniciar()
-            clearInterval(direction)
-            square.style.top = "0px"
-            square.style.left = "0px"
-            clearInterval(cc)
+            document.location.reload();
         }
-    },1000)
+    },100)
 }
 
 const iniciar = ()=>{
-    onload = CordFood,verify()
+    onload = CordFood,contagem()
+    square.style.top = CordY+"px"
+    square.style.left = CordX+"px"
 }
 iniciar()
