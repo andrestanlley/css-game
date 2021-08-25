@@ -71,7 +71,7 @@ document.body.addEventListener("keydown", ()=>{
 })
 
 
-let speed = 0
+let speed = (telaY*6)/100
 let direction
 const Esquerda = () =>{
     square.style.transform = "scaleX(1)"
@@ -143,8 +143,10 @@ let verify = ()=>{
     if (((CordX+tamanho)>Number(food.style.left.replace('px','')) && (CordX)<Number(food.style.left.replace('px',''))+tamanho) && (CordY+tamanho)>Number(food.style.top.replace('px','')) && (CordY)<Number(food.style.top.replace('px',''))+tamanho){
         CordFood()
         tamanho -= 3
-        passo += 1.5
-        tempo += 1.5
+        speed -= 5
+        passo += 1
+        tempo += 2
+        console.log(speed)
     if (tempo > 0 && tamanho < Math.round((telaY*16)/100)*40/100){
         alert(`VOCÊ GANHOU! :DD`)
         atualizar()
@@ -155,7 +157,7 @@ let verify = ()=>{
 /* Conta o tempo */
 let time = document.getElementById('time')
 let tempo
-tempo = 15 //Define o tempo em segundos
+tempo = 25 //Define o tempo em segundos
 const contagem = ()=>{
         tempo -= 0.1
         time.innerText = tempo.toFixed(1)+"s"
