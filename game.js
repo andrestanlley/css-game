@@ -3,22 +3,22 @@ let welcome = document.querySelector('div.welcome')
 let gameover = document.querySelector('div.gameover')
 let pause = document.querySelector('div.pause')
 /* Tamanho da tela */
+let telaX = visualViewport.width
+let telaY = visualViewport.height
 onload = ()=> 
 {if (telaX < telaY){
     console.log('Mobile!')
     document.body.style.backgroundImage = "url('./img/background_mobile.jpg')"
 }}
-let telaX = visualViewport.width
-let telaY = visualViewport.height
 const atualizar = ()=>{
     document.location.reload();
 }
 
 // Iniciar funções no jogo.
 const iniciar = ()=>{
-    CordFood()
     square.style.top = CordY+"px"
     square.style.left = CordX+"px"
+    CordFood()
     square.style.visibility = "visible"
     food.style.visibility = "visible"
     cc = setInterval(()=>{contagem()},100)
@@ -40,10 +40,9 @@ let CordFood = ()=>{
 /*Movimentação do personagem*/
 
 let CordX = Math.round(Math.random() * (telaX-tamanho)/10)*10, CordY = Math.round(Math.random() * (telaY-tamanho)/10)*10
-let passo = 5
+let passo = (telaY*1)/100
 let square = document.getElementById('square')
 document.body.addEventListener("keydown", ()=>{
-    console.info(event.keyCode)
     pause.style.visibility = "hidden"
     switch (event.keyCode){
         case 32:
@@ -118,28 +117,37 @@ let verify = ()=>{
     food.style.height = tamanho+"px"
     square.style.width = tamanho+"px"
     square.style.height = tamanho+"px"
-    food.style.top = CordFoodY+Math.round(Math.random() * (tamanho - (-tamanho)) + -tamanho)+"px"
-    food.style.left = CordFoodX+Math.round(Math.random() * (tamanho - (-tamanho)) + -tamanho)+"px"
-    if (CordFoodY <= 0){CordFoodY += tamanho}
-    if (CordFoodY >= telaY){CordFoodY -= tamanho}
-    if (CordFoodX <= 0){CordFoodX += tamanho}
-    if (CordFoodX >= telaX){CordFoodX -= tamanho}
-    if (CordX >= (telaX-tamanho)){Esquerda()}
-    if (CordX <= -1){Direita()}
-    if (CordY >= (telaY-tamanho)){Cima()}
-    if (CordY <= -1){Baixo()}
-    if (tempo <= 10){
+    food.style.top = CordFoodY+Math.round(Math.random() * (passo/2 - (-passo)) + -passo)+"px"
+    food.style.left = CordFoodX+Math.round(Math.random() * (passo/2 - (-passo)) + -passo)+"px"
+    if (CordFoodY <= 0){
+        CordFoodY += tamanho
+    } else if (CordFoodY >= telaY){
+        CordFoodY -= tamanho
+    } else if (CordFoodX <= 0){
+        CordFoodX += tamanho
+    }else if (CordFoodX >= telaX){
+        CordFoodX -= tamanho
+    }else if (CordX >= (telaX-tamanho)){
+        Esquerda()
+    }else if (CordX <= -1){
+        Direita()
+    }else if (CordY >= (telaY-tamanho)){
+        Cima()
+    }else if (CordY <= -1){
+        Baixo()
+    }else if (tempo <= 10){
         time.style.color = "red"
     } else {
         time.style.color = "white"
     }
     if (((CordX+tamanho)>Number(food.style.left.replace('px','')) && (CordX)<Number(food.style.left.replace('px',''))+tamanho) && (CordY+tamanho)>Number(food.style.top.replace('px','')) && (CordY)<Number(food.style.top.replace('px',''))+tamanho){
         CordFood()
-        tamanho -= 5
-        passo += 2
+        tamanho -= 3
+        passo += 1.5
         tempo += 1.5
-    if (tempo > 0 && tamanho < Math.round((telaY*16)/100)*14/100){
+    if (tempo > 0 && tamanho < Math.round((telaY*16)/100)*40/100){
         alert(`VOCÊ GANHOU! :DD`)
+        atualizar()
     }
     }
 }
